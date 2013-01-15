@@ -3,9 +3,12 @@ package com.example.ScorchedPocket;
 import android.content.Context;
 import android.graphics.*;
 import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
 
 public class ScorchedPocketGame extends View implements Runnable {
+    private float tank1X = 11;
+    private float tank1Y = 226;
     Bitmap backgroundImage;
     Bitmap tank1Image;
     Bitmap tank2Image;
@@ -35,7 +38,7 @@ public class ScorchedPocketGame extends View implements Runnable {
     protected void onDraw(Canvas canvas) {
         canvas.drawBitmap(backgroundImage, 0, 0, null);
 
-        canvas.drawBitmap(tank1Image, 11, 226, null);
+        canvas.drawBitmap(tank1Image, tank1X, tank1Y, null);
         canvas.drawBitmap(tank2Image, 404, 268, null);
         canvas.drawBitmap(ammoImage, ammoX, 203, null);
         canvas.drawBitmap(explosionImage, 155, 164, null);
@@ -47,5 +50,18 @@ public class ScorchedPocketGame extends View implements Runnable {
 
         postInvalidate();
         handler.postDelayed(this, 30);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        tank1X = event.getX();
+        tank1Y = event.getY();
+
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            ammoX = 0;
+        }
+
+        postInvalidate();
+        return true;
     }
 }
