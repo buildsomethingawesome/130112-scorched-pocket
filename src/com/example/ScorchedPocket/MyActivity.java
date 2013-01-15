@@ -13,6 +13,12 @@ public class MyActivity extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        setContentView(new ScorchedPocketGame(this));
     }
 }
